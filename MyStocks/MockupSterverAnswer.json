@@ -1,0 +1,33 @@
+[
+    {
+        "ticker": "AAPL",
+        "name": "Apple Inc.",
+        "close": 325.12,
+        "lastClose": 324.11
+    },
+    {
+        "ticker": "MSFT",
+        "name": "Microsoft",
+        "close": 220.86,
+        "lastClose": 221.85
+    },
+    {
+        "ticker": "AMZN",
+        "name": "Amazon.com",
+        "close": 3363.71,
+        "lastClose": 3362.70
+    },
+    {
+        "ticker": "FB",
+        "name": "Facebook Inc.",
+        "close": 271.82,
+        "lastClose": 272.89
+    },
+    {
+        "ticker": "JPM",
+        "name": "JPMorgan",
+        "close": 100.22,
+        "lastClose": 101.21
+    }
+]
+ 
