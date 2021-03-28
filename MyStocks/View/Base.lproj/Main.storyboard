@@ -266,5 +266,36 @@
             </objects>
             <point key="canvasLocation" x="913.04347826086962" y="141.96428571428569"/>
         </scene>
+        <!--Chart View Controller-->
+        <scene sceneID="eLo-q0-p39">
+            <objects>
+                <viewController storyboardIdentifier="chartVC" id="XyU-lY-Bo8" customClass="ChartViewController" customModule="MyStocks" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kwb-Wp-a6x">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hc8-1R-Qci">
+                                <rect key="frame" x="20" y="44" width="374" height="374"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Hc8-1R-Qci" secondAttribute="height" multiplier="1:1" id="N18-TA-Bqj"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ZUx-YW-XjU" firstAttribute="trailing" secondItem="Hc8-1R-Qci" secondAttribute="trailing" constant="20" id="qRi-fx-MxJ"/>
+                            <constraint firstItem="Hc8-1R-Qci" firstAttribute="top" secondItem="ZUx-YW-XjU" secondAttribute="top" id="wz1-Iv-sow"/>
+                            <constraint firstItem="Hc8-1R-Qci" firstAttribute="leading" secondItem="ZUx-YW-XjU" secondAttribute="leading" constant="20" id="yyW-CB-XIL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ZUx-YW-XjU"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="Hc8-1R-Qci" id="wiI-wu-J4v"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6By-Tu-Nef" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1811.594202898551" y="141.96428571428569"/>
+        </scene>
     </scenes>
 </document>

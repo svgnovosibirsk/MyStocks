@@ -28,6 +28,90 @@
         "name": "JPMorgan",
         "close": 100.22,
         "lastClose": 101.21
+    },
+    {
+        "ticker": "BRK.B",
+        "name": "Berkshire",
+        "close": 210.91,
+        "lastClose": 210.80
+    },
+    {
+        "ticker": "JNJ",
+        "name": "Johnson & Johnson",
+        "close": 148.1,
+        "lastClose": 147.9
+    },
+    {
+        "ticker": "GOOG",
+        "name": "Alphabet Inc",
+        "close": 1568.08,
+        "lastClose": 1565.09
+    },
+    {
+        "ticker": "XOM",
+        "name": "Exxon Mobil",
+        "close": 34.15,
+        "lastClose": 35.11
+    },
+    {
+        "ticker": "BAC",
+        "name": "Bank of America",
+        "close": 23.62,
+        "lastClose": 21.42
+    },
+    {
+        "ticker": "WFC",
+        "name": "Wells Fargo",
+        "close": 23.25,
+        "lastClose": 21.22
+    },
+    {
+        "ticker": "INTC",
+        "name": "Intel Corporation",
+        "close": 53.55,
+        "lastClose": 52.56
+    },
+    {
+        "ticker": "T",
+        "name": "AT&T Inc.",
+        "close": 27.49,
+        "lastClose": 28.39
+    },
+    {
+        "ticker": "V",
+        "name": "Visa Inc",
+        "close": 202.2,
+        "lastClose": 201.17
+    },
+    {
+        "ticker": "CSCO",
+        "name": "Cisco Systems Inc.",
+        "close": 39.89,
+        "lastClose": 38.99
+    },
+    {
+        "ticker": "CVX",
+        "name": "Chevron",
+        "close": 71.99,
+        "lastClose": 72.95
+    },
+    {
+        "ticker": "UNH",
+        "name": "UnitedHealth",
+        "close": 321.85,
+        "lastClose": 323.99
+    },
+    {
+        "ticker": "PFE",
+        "name": "Pfizer Inc.",
+        "close": 36.86,
+        "lastClose": 38.96
+    },
+    {
+        "ticker": "HD",
+        "name": "Home Depot Inc.",
+        "close": 287.09,
+        "lastClose": 286.19
     }
 ]
  

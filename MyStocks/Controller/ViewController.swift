@@ -90,6 +90,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stockCell", for: indexPath) as! StockCell
         let stock = stocksArray[indexPath.row]
         cell.configureCell(with: stock)
+        cell.backgroundColor = indexPath.row.isMultiple(of: 2) ? .systemGroupedBackground : .white
         
         return cell
     }
@@ -117,23 +118,28 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 extension ViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text?.lowercased() else { return }
-            var searchArray = [Stock]()
-            for stock in stocksArray {
-                if stock.stockName.lowercased().contains(searchText) || stock.stockTicker.lowercased().contains(searchText) {
-                    searchArray.append(stock)
-                }
+        var searchArray = [Stock]()
+        for stock in stocksArray {
+            if stock.stockName.lowercased().contains(searchText) || stock.stockTicker.lowercased().contains(searchText) {
+                searchArray.append(stock)
             }
-            tempStocksArray = stocksArray
-            stocksArray = searchArray
-            tableView.reloadData()
+        }
+        tempStocksArray = stocksArray
+        stocksArray = searchArray
+
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
             stocksArray = tempStocksArray
-            tableView.reloadData()
+            
             DispatchQueue.main.async {
-                 searchBar.resignFirstResponder()
+                self.tableView.reloadData()
+                searchBar.resignFirstResponder()
             }
         }
     }
