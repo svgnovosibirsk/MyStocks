@@ -17,7 +17,8 @@ class ViewController: UIViewController {
     
     var stocksArray: Results<Stock>?
     var favouriteStocksArray = [Stock]()
-    var tempStocksArray = [Stock]()
+    //var tempStocksArray = [Stock]()
+    var tempStocksArray: Results<Stock>?
     
     
     @IBOutlet weak var tableView: UITableView!
@@ -121,16 +122,18 @@ extension ViewController: UISearchBarDelegate {
         let namePredicate:NSPredicate = NSPredicate(format: "stockName CONTAINS[cd] %@", searchBar.text!)
         let tickerPedicate:NSPredicate = NSPredicate(format: "stockTicker CONTAINS[cd] %@", searchBar.text!)
         let predicate:NSPredicate  = NSCompoundPredicate(orPredicateWithSubpredicates: [namePredicate,tickerPedicate])
+        tempStocksArray = stocksArray
         stocksArray = stocksArray?.filter(predicate)
+        tableView.reloadData()
     }
-
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
-            loadStocks()
-        }
-        
-        DispatchQueue.main.async {
-            searchBar.resignFirstResponder()
+            stocksArray = tempStocksArray
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                searchBar.resignFirstResponder()
+            }
         }
     }
 }
