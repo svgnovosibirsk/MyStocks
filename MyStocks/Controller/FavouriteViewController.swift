@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import RealmSwift
 
 class FavouriteViewController: UIViewController {
 
-    var stocksArray = [Stock]()
+    var stocksArray: Results<Stock>?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -33,13 +34,14 @@ class FavouriteViewController: UIViewController {
 extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return stocksArray.count
+        return stocksArray?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stockCell", for: indexPath) as! StockCell
-        let stock = stocksArray[indexPath.row]
-        cell.configureCell(with: stock)
+        if let stock = stocksArray?[indexPath.row] {
+            cell.configureCell(with: stock)
+        }
         
         return cell
     }

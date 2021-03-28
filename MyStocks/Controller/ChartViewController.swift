@@ -30,9 +30,11 @@ class ChartViewController: UIViewController {
             context.cgContext.setStrokeColor(UIColor.blue.cgColor)
             context.cgContext.setLineWidth(3)
             
-            let chartWidth = imageView.bounds.width
+            //let chartWidth = imageView.bounds.width
             let chartHeight = Double(imageView.bounds.height)
-           
+            
+           // Отрисовка графика в цикле
+            
 //            var date = Double(chartWidth) / Double(historicalPrices.count)
 //
 //            context.cgContext.move(to: CGPoint(x: 0, y: historicalPrices[0]))

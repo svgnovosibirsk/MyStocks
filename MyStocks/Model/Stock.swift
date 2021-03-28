@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import RealmSwift
 
-class Stock {
-    var stockTicker = ""
-    var stockName = ""
-    var stockPrice = 0.0
-    var stockLastClosePrice = 0.0
-    var stockDelta = 0.0
-    var isFavourite = false
+class Stock: Object {
+    @objc dynamic var stockTicker = ""
+    @objc dynamic var stockName = ""
+    @objc dynamic var stockPrice = 0.0
+    @objc dynamic var stockLastClosePrice = 0.0
+    @objc dynamic var stockDelta = 0.0
+    @objc dynamic var isFavourite = false
 }

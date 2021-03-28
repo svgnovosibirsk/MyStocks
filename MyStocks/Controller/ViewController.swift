@@ -9,10 +9,13 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import RealmSwift
 
 class ViewController: UIViewController {
     
-    var stocksArray = [Stock]()
+    let realm = try! Realm()
+    
+    var stocksArray: Results<Stock>?
     var favouriteStocksArray = [Stock]()
     var tempStocksArray = [Stock]()
     
@@ -38,20 +41,28 @@ class ViewController: UIViewController {
         tableView.register(UINib(nibName: "StockCell", bundle: nil), forCellReuseIdentifier: "stockCell")
         searchField.delegate = self
         
-        // сохранение значения для импользовании в функии фильтрации
-        tempStocksArray = stocksArray
-        
+        // Запускается при первом запуске, при отсутствии данных в базы
+        // При платного аккаунта https://api.polygon.io подгружаем данные с сервераю
         setupStocksArrayfromMockup()
+        
+        // Подгружает данные из базы
+        loadStocks()
        
     }
     
     @IBAction func favouriteBtnPressed(_ sender: UIButton) {
          let vc = storyboard?.instantiateViewController(withIdentifier: "favourite") as! FavouriteViewController
-         vc.stocksArray = favouriteStocksArray
+         let tempStocksArray = stocksArray?.filter(NSPredicate(format: "isFavourite = true"))
+         vc.stocksArray = tempStocksArray
          present(vc, animated: true)
      }
     
     private func setupStocksArrayfromMockup() {
+        // Проверяем наличие оюъектов в базе данных
+        let tempStocksArray = realm.objects(Stock.self)
+        guard tempStocksArray.isEmpty else { return }
+        
+        // Если база пустая, прогружаем данные из файла
         guard let mockupServerAnswerURL = Bundle.main.url(forResource: "MockupSterverAnswer", withExtension: "json") else { return }
         guard let data = try? JSON(Data(contentsOf: mockupServerAnswerURL)) else { return }
         for i in 0...data.count - 1 {
@@ -63,19 +74,10 @@ class ViewController: UIViewController {
             let delta = price - prevClose
             stock.stockPrice = price
             stock.stockDelta = delta
-                
-            stocksArray.append(stock)
+
+            save(stock: stock)
         }
     }
-    
-    private func setupFavouriteStocksArray() {
-        for stock in stocksArray {
-            if stock.isFavourite {
-                favouriteStocksArray.append(stock)
-            }
-        }
-    }
-    
 }
 
 // MARK: - UITableViewDelegate and UITableViewDataSource Methods
@@ -83,32 +85,31 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        stocksArray.count
+        return stocksArray?.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stockCell", for: indexPath) as! StockCell
-        let stock = stocksArray[indexPath.row]
-        cell.configureCell(with: stock)
+        if let stock = stocksArray?[indexPath.row] {
+            cell.configureCell(with: stock)
+        }
         cell.backgroundColor = indexPath.row.isMultiple(of: 2) ? .systemGroupedBackground : .white
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let stock = stocksArray[indexPath.row]
+        guard let stock = stocksArray?[indexPath.row] else { return }
         
-        if stock.isFavourite {
-            stock.isFavourite.toggle()
-            favouriteStocksArray.removeAll()
-            setupFavouriteStocksArray()
-            tableView.reloadData()
+            do {
+                try realm.write {
+                    stock.isFavourite.toggle()
+                }
+            } catch {
+                print("Realm write error \(error)")
+            }
             
-        } else {
-            stock.isFavourite.toggle()
-            favouriteStocksArray.append(stock)
-            tableView.reloadData()
-        }
+        tableView.reloadData()
     }
     
 }
@@ -117,30 +118,40 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchText = searchBar.text?.lowercased() else { return }
-        var searchArray = [Stock]()
-        for stock in stocksArray {
-            if stock.stockName.lowercased().contains(searchText) || stock.stockTicker.lowercased().contains(searchText) {
-                searchArray.append(stock)
-            }
-        }
-        tempStocksArray = stocksArray
-        stocksArray = searchArray
-
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-        
+        let namePredicate:NSPredicate = NSPredicate(format: "stockName CONTAINS[cd] %@", searchBar.text!)
+        let tickerPedicate:NSPredicate = NSPredicate(format: "stockTicker CONTAINS[cd] %@", searchBar.text!)
+        let predicate:NSPredicate  = NSCompoundPredicate(orPredicateWithSubpredicates: [namePredicate,tickerPedicate])
+        stocksArray = stocksArray?.filter(predicate)
     }
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
-            stocksArray = tempStocksArray
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                searchBar.resignFirstResponder()
-            }
+            loadStocks()
         }
+        
+        DispatchQueue.main.async {
+            searchBar.resignFirstResponder()
+        }
+    }
+}
+
+// MARK: - Realm Methods
+
+extension ViewController {
+    
+    func save(stock: Stock) {
+        do {
+            try realm.write {
+                realm.add(stock)
+            }
+        } catch {
+            print("Realm saving error \(error)")
+        }
+        tableView.reloadData()
+    }
+    
+    func loadStocks() {
+        stocksArray = realm.objects(Stock.self)
+        tableView.reloadData()
     }
 }
