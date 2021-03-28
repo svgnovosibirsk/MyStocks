@@ -48,6 +48,9 @@ extension FavouriteViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(withIdentifier: "chartVC") as! ChartViewController
+        if let stock = stocksArray?[indexPath.row] {
+            vc.stock = stock
+        }
         present(vc, animated: true)
     }
 }

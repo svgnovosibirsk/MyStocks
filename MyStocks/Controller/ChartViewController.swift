@@ -14,14 +14,42 @@ class ChartViewController: UIViewController {
     // При наличии платного аккаунта https://api.polygon.io и отсутствии жесткого лимита на количество обращений к API, получаем исторические данные через запрос https://api.polygon.io/v1/open-close/HD/2020-10-14?unadjusted=true&apiKey=Zp5xRd4whBpV6xxynO_xxZPZpbJ3RrC7
     
     var historicalPrices = [205.66, 207.81, 210.32, 230.65, 225.12, 220.42, 215.76, 220.86, 215.32, 210.41, 207.86, 215.44, 207.12, 220.56, 217.86, 222.85, 220.76, 230.65, 225.12, 220.42] // При получении данных через API, устанавливаем значение в зависимости от рассматриваемого периода (неделя, месяц, год...)
+    var stock = Stock()
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var tickerLbl: UILabel!
+    @IBOutlet weak var nameLbl: UILabel!
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tickerLbl.text = stock.stockTicker
+        nameLbl.text = stock.stockName
         drawChart()
     }
+    
+    // Иммитация графиков за неделю, месяц, год. При наличии платного аккаунта https://api.polygon.io и отсутствии жесткого лимита на количество обращений к API, получаем исторические данные через запрос к серверу.
+    
+    @IBAction func weekBtnPressed(_ sender: UIButton) {
+        historicalPrices = [200.66, 207.81, 190.32, 230.65, 205.12, 220.42, 205.76, 225.86, 202.32, 210.41, 230.86, 215.44, 203.12, 220.56, 207.86, 222.85, 220.76, 230.65, 205.12, 220.42]
+        drawChart()
+    }
+    
+    @IBAction func monthBtnPressed(_ sender: UIButton) {
+        historicalPrices = [235.66, 232.81, 230.32, 228.65, 235.12, 226.42, 220.76, 218.86, 216.32, 220.41, 214.86, 215.44, 203.12, 207.56, 210.86, 200.85, 205.76, 210.65, 215.12, 220.42]
+        drawChart()
+    }
+    
+    @IBAction func yearBtnPressed(_ sender: UIButton) {
+        historicalPrices = [180.66, 185.81, 190.32, 185.65, 195.12, 200.42, 195.76, 190.86, 195.32, 200.41, 204.86, 210.44, 203.12, 207.56, 210.86, 215.85, 220.76, 210.65, 225.12, 220.42]
+        drawChart()
+    }
+    
+    @IBAction func backBtnPressed(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
     private func drawChart() {
         let renderer = UIGraphicsImageRenderer(bounds: imageView.bounds)

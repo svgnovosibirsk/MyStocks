@@ -280,10 +280,88 @@
                                     <constraint firstAttribute="width" secondItem="Hc8-1R-Qci" secondAttribute="height" multiplier="1:1" id="N18-TA-Bqj"/>
                                 </constraints>
                             </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1dM-Tp-HdT">
+                                <rect key="frame" x="20" y="438" width="374" height="24"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ticker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y8J-CE-5Ht">
+                                        <rect key="frame" x="0.0" y="0.0" width="177" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Company name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AMT-66-npB">
+                                        <rect key="frame" x="197" y="0.0" width="177" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4Ir-DL-rNt">
+                                <rect key="frame" x="20" y="482" width="374" height="36"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFg-hi-3P7">
+                                        <rect key="frame" x="0.0" y="0.0" width="111.5" height="36"/>
+                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Week">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="weekBtnPressed:" destination="XyU-lY-Bo8" eventType="touchUpInside" id="PdN-U3-RlT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V3e-zl-TMy">
+                                        <rect key="frame" x="131.5" y="0.0" width="111" height="36"/>
+                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Month">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="monthBtnPressed:" destination="XyU-lY-Bo8" eventType="touchUpInside" id="bdY-5b-Re6"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PIX-hF-vqZ">
+                                        <rect key="frame" x="262.5" y="0.0" width="111.5" height="36"/>
+                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="Year">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="yearBtnPressed:" destination="XyU-lY-Bo8" eventType="touchUpInside" id="ped-f0-zI1"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iP0-5s-j4L">
+                                <rect key="frame" x="20" y="812" width="374" height="50"/>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="8de-6E-IvH"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="backBtnPressed:" destination="XyU-lY-Bo8" eventType="touchUpInside" id="ZDY-nC-CmM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="4Ir-DL-rNt" firstAttribute="top" secondItem="1dM-Tp-HdT" secondAttribute="bottom" constant="20" id="2QP-5z-4R7"/>
+                            <constraint firstItem="ZUx-YW-XjU" firstAttribute="trailing" secondItem="1dM-Tp-HdT" secondAttribute="trailing" constant="20" id="JXE-Dc-roS"/>
+                            <constraint firstItem="ZUx-YW-XjU" firstAttribute="trailing" secondItem="4Ir-DL-rNt" secondAttribute="trailing" constant="20" id="MLC-od-Ezc"/>
+                            <constraint firstItem="1dM-Tp-HdT" firstAttribute="leading" secondItem="ZUx-YW-XjU" secondAttribute="leading" constant="20" id="PwW-Ia-ZPw"/>
+                            <constraint firstItem="1dM-Tp-HdT" firstAttribute="top" secondItem="Hc8-1R-Qci" secondAttribute="bottom" constant="20" id="bu8-zA-ywM"/>
+                            <constraint firstItem="iP0-5s-j4L" firstAttribute="bottom" secondItem="ZUx-YW-XjU" secondAttribute="bottom" id="f3c-Le-f7J"/>
+                            <constraint firstItem="iP0-5s-j4L" firstAttribute="leading" secondItem="ZUx-YW-XjU" secondAttribute="leading" constant="20" id="nbC-aY-vGv"/>
+                            <constraint firstItem="4Ir-DL-rNt" firstAttribute="leading" secondItem="ZUx-YW-XjU" secondAttribute="leading" constant="20" id="pgo-Ad-0aq"/>
                             <constraint firstItem="ZUx-YW-XjU" firstAttribute="trailing" secondItem="Hc8-1R-Qci" secondAttribute="trailing" constant="20" id="qRi-fx-MxJ"/>
+                            <constraint firstItem="ZUx-YW-XjU" firstAttribute="trailing" secondItem="iP0-5s-j4L" secondAttribute="trailing" constant="20" id="u5P-c6-gpe"/>
                             <constraint firstItem="Hc8-1R-Qci" firstAttribute="top" secondItem="ZUx-YW-XjU" secondAttribute="top" id="wz1-Iv-sow"/>
                             <constraint firstItem="Hc8-1R-Qci" firstAttribute="leading" secondItem="ZUx-YW-XjU" secondAttribute="leading" constant="20" id="yyW-CB-XIL"/>
                         </constraints>
@@ -291,6 +369,8 @@
                     </view>
                     <connections>
                         <outlet property="imageView" destination="Hc8-1R-Qci" id="wiI-wu-J4v"/>
+                        <outlet property="nameLbl" destination="AMT-66-npB" id="d3c-aN-UFO"/>
+                        <outlet property="tickerLbl" destination="y8J-CE-5Ht" id="HmB-08-gsy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6By-Tu-Nef" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
